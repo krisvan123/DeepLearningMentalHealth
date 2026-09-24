@@ -48,15 +48,15 @@ export const ChatInput: React.FC<ChatInputProps> = ({
     <div className="w-full">
       {/* Loading state indicator */}
       {isLoading && (
-        <div className="flex items-center gap-2 mb-2 text-xs text-mono-500 animate-pulse px-2">
-          <span className="w-2 h-2 rounded-full bg-mono-400" />
-          <span>Processing...</span>
+        <div className="flex items-center gap-2 mb-2 text-xs text-mono-500 animate-pulse px-1">
+          <span className="w-2 h-2 rounded-full bg-mono-500" />
+          <span>Processing reflection...</span>
         </div>
       )}
 
       <form
         onSubmit={handleSubmit}
-        className="relative flex items-end gap-2 p-2 bg-white border border-mono-300 rounded-2xl focus-within:border-black focus-within:ring-1 focus-within:ring-black transition-all shadow-sm"
+        className="relative flex items-end gap-3 p-2 sm:p-2.5 bg-white border border-mono-300 rounded-2xl focus-within:border-black focus-within:ring-1 focus-within:ring-black transition-all shadow-sm"
       >
         <textarea
           ref={textareaRef}
@@ -66,21 +66,21 @@ export const ChatInput: React.FC<ChatInputProps> = ({
           placeholder="Share what's on your mind..."
           rows={1}
           disabled={disabled || isLoading}
-          className="w-full resize-none border-0 bg-transparent py-1.5 px-2 text-sm text-mono-900 placeholder:text-mono-400 focus:outline-none focus:ring-0 max-h-36 disabled:opacity-50"
+          className="w-full resize-none border-0 bg-transparent py-1.5 px-3 text-sm text-mono-900 placeholder:text-mono-400 focus:outline-none focus:ring-0 max-h-36 disabled:opacity-50 leading-relaxed"
           aria-label="User reflection input"
         />
 
         <button
           type="submit"
           disabled={!input.trim() || isLoading || disabled}
-          className="flex-shrink-0 w-8 h-8 rounded-xl bg-black text-white flex items-center justify-center hover:bg-mono-800 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+          className="flex-shrink-0 w-9 h-9 rounded-xl bg-black text-white flex items-center justify-center hover:bg-mono-800 disabled:opacity-25 disabled:cursor-not-allowed transition-all"
           aria-label="Send message"
         >
           <ArrowUp className="w-4 h-4 stroke-[2.5]" />
         </button>
       </form>
 
-      <div className="text-center mt-2 text-[11px] text-mono-400">
+      <div className="text-center mt-2.5 text-[11px] text-mono-400">
         MindCare processes reflections through local Deep Learning classification.
       </div>
     </div>

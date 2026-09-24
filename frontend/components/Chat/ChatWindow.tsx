@@ -22,22 +22,24 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
 
   if (messages.length === 0) {
     return (
-      <div className="flex-1 flex items-center justify-center">
+      <div className="flex-1 flex items-center justify-center p-4 sm:p-8 overflow-y-auto">
         <EmptyState onSelectPrompt={onSelectPrompt} />
       </div>
     );
   }
 
   return (
-    <div className="flex-1 overflow-y-auto px-2 sm:px-4 py-4 space-y-2">
-      {messages.map((msg) => (
-        <ChatMessage
-          key={msg.id}
-          message={msg}
-          developerMode={developerMode}
-        />
-      ))}
-      <div ref={bottomRef} />
+    <div className="flex-1 overflow-y-auto px-4 sm:px-8 py-6">
+      <div className="max-w-[850px] w-full mx-auto space-y-5 sm:space-y-6">
+        {messages.map((msg) => (
+          <ChatMessage
+            key={msg.id}
+            message={msg}
+            developerMode={developerMode}
+          />
+        ))}
+        <div ref={bottomRef} className="h-4" />
+      </div>
     </div>
   );
 };

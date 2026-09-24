@@ -36,11 +36,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Sidebar Panel */}
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 w-72 bg-mono-50 border-r border-mono-200 p-5 flex flex-col justify-between transform transition-transform duration-200 ease-in-out lg:translate-x-0 ${
+        className={`fixed top-0 bottom-0 left-0 z-50 w-[300px] bg-mono-50 border-r border-mono-200 p-6 flex flex-col justify-between transform transition-transform duration-200 ease-in-out lg:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="space-y-6 overflow-y-auto">
+        <div className="space-y-6 overflow-y-auto pr-1">
           {/* Header & Mobile Close */}
           <div className="flex items-center justify-between pb-3 border-b border-mono-200">
             <div>

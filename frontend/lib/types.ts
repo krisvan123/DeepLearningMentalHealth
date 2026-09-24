@@ -13,6 +13,7 @@ export interface Message {
   is_ood?: boolean;
   latency_ms?: number;
   probabilities?: Record<string, number>;
+  error_detail?: string;
 }
 
 export interface ChatRequest {

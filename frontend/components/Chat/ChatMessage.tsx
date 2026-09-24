@@ -1,6 +1,6 @@
 import React from "react";
 import { Message } from "@/lib/types";
-import { AlertTriangle, Clock, Zap } from "lucide-react";
+import { AlertTriangle, Clock, Server, Terminal } from "lucide-react";
 
 interface ChatMessageProps {
   message: Message;
@@ -16,8 +16,8 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
 
   if (isUser) {
     return (
-      <div className="flex justify-end my-3">
-        <div className="bg-mono-900 text-white px-4 py-3 rounded-2xl rounded-tr-sm max-w-[85%] sm:max-w-[75%] text-sm leading-relaxed shadow-sm">
+      <div className="flex justify-end my-1 w-full">
+        <div className="bg-black text-white px-5 py-3.5 rounded-2xl rounded-tr-sm max-w-[85%] sm:max-w-[70%] text-sm leading-relaxed shadow-sm">
           {message.content}
         </div>
       </div>
@@ -27,8 +27,8 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
   // High-Risk Suicide Crisis Protocol layout
   if (isHighRisk) {
     return (
-      <div className="flex justify-start my-4 w-full">
-        <div className="w-full max-w-[92%] sm:max-w-[85%] border-2 border-black rounded-2xl p-4 sm:p-5 bg-white space-y-3 shadow-sm">
+      <div className="flex justify-start my-2 w-full">
+        <div className="w-full max-w-[95%] sm:max-w-[80%] border-2 border-black rounded-2xl p-5 bg-white space-y-3 shadow-sm">
           <div className="flex items-center gap-2 pb-2 border-b border-mono-200 text-xs font-bold uppercase tracking-wider text-black">
             <AlertTriangle className="w-4 h-4 text-black" />
             <span>Crisis Support Protocol</span>
@@ -55,9 +55,9 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
 
   // Standard Assistant Response layout
   return (
-    <div className="flex justify-start my-3 w-full">
-      <div className="w-full max-w-[92%] sm:max-w-[85%] space-y-2">
-        <div className="bg-white text-mono-900 border border-mono-200 px-4 py-3.5 rounded-2xl rounded-tl-sm text-sm leading-relaxed shadow-sm whitespace-pre-line">
+    <div className="flex justify-start my-1 w-full">
+      <div className="w-full max-w-[95%] sm:max-w-[78%] space-y-2.5">
+        <div className="bg-white text-mono-900 border border-mono-200 px-5 py-4 rounded-2xl rounded-tl-sm text-sm leading-relaxed shadow-sm whitespace-pre-line">
           {message.content}
         </div>
 
@@ -68,28 +68,38 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
 };
 
 const DeveloperCard: React.FC<{ message: Message }> = ({ message }) => {
-  if (!message.predicted_class) return null;
-
   return (
-    <div className="rounded-xl border border-dashed border-mono-300 bg-mono-50 p-3 text-xs font-mono text-mono-700 space-y-1.5">
-      <div className="flex justify-between items-center text-mono-500 font-semibold border-b border-mono-200 pb-1">
-        <span>DEVELOPER DEBUG INSPECTION</span>
-        <span className="flex items-center gap-1">
+    <div className="rounded-xl border border-dashed border-mono-300 bg-mono-50 p-3.5 text-xs font-mono text-mono-700 space-y-2">
+      <div className="flex justify-between items-center text-mono-500 font-semibold border-b border-mono-200 pb-1.5">
+        <span className="flex items-center gap-1.5 uppercase tracking-wider text-[10px]">
+          <Terminal className="w-3 h-3" />
+          Developer Inspection
+        </span>
+        <span className="flex items-center gap-1 text-[11px]">
           <Clock className="w-3 h-3" />
-          {message.latency_ms ? `${message.latency_ms.toFixed(1)} ms` : "N/A"}
+          {message.latency_ms !== undefined ? `${message.latency_ms.toFixed(1)} ms` : "N/A"}
         </span>
       </div>
 
-      <div className="flex justify-between">
-        <span className="text-mono-500">Predicted Class:</span>
-        <span className="font-bold text-mono-900">
-          {message.predicted_class}
-          {message.is_ood && " (OOD Fallback)"}
-        </span>
-      </div>
+      {message.error_detail && (
+        <div className="bg-mono-200/60 p-2 rounded text-[11px] text-black">
+          <span className="font-bold">Error Trace: </span>
+          <span>{message.error_detail}</span>
+        </div>
+      )}
+
+      {message.predicted_class && (
+        <div className="flex justify-between items-center">
+          <span className="text-mono-500">Predicted Class:</span>
+          <span className="font-bold text-mono-900">
+            {message.predicted_class}
+            {message.is_ood && " (OOD Fallback)"}
+          </span>
+        </div>
+      )}
 
       {message.confidence !== undefined && (
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           <span className="text-mono-500">Confidence Score:</span>
           <span className="font-semibold text-mono-800">
             {(message.confidence * 100).toFixed(1)}% ({message.confidence.toFixed(4)})

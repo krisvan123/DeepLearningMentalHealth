@@ -17,7 +17,7 @@ export default function Home() {
   const [developerMode, setDeveloperMode] = useState(false);
   const [modelStatus, setModelStatus] = useState<ModelStatus | null>(null);
 
-  // Fetch model health and configuration status on load
+  // Fetch model health and configuration status on load and periodically
   useEffect(() => {
     async function checkStatus() {
       try {
@@ -37,6 +37,9 @@ export default function Home() {
       }
     }
     checkStatus();
+    // Poll every 30 seconds for live status
+    const interval = setInterval(checkStatus, 30000);
+    return () => clearInterval(interval);
   }, []);
 
   const handleSendMessage = async (userText: string) => {
@@ -75,12 +78,16 @@ export default function Home() {
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
-    } catch {
+    } catch (err: unknown) {
+      const errorMsg =
+        err instanceof Error ? err.message : "Inference service unreachable";
       const fallbackMessage: Message = {
         id: `asst-${Date.now()}`,
         role: "assistant",
         content: "Something went wrong while processing your message. Please try again.",
         timestamp: new Date().toISOString(),
+        error_detail: errorMsg,
+        predicted_class: "Error",
       };
       setMessages((prev) => [...prev, fallbackMessage]);
     } finally {
@@ -111,9 +118,9 @@ export default function Home() {
       />
 
       {/* Main Chat Interface */}
-      <div className="flex-1 flex flex-col h-full lg:pl-72">
+      <div className="flex-1 flex flex-col h-full lg:pl-[300px] overflow-hidden">
         {/* Header */}
-        <header className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-mono-200 bg-white/90 backdrop-blur-sm z-10">
+        <header className="flex items-center justify-between px-5 sm:px-8 py-3.5 border-b border-mono-200 bg-white/95 backdrop-blur-sm z-10 shrink-0">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setSidebarOpen(true)}
@@ -135,8 +142,8 @@ export default function Home() {
           <StatusIndicator status={currentStatus} />
         </header>
 
-        {/* Scrollable Chat Area */}
-        <main className="flex-1 flex flex-col overflow-hidden max-w-chat mx-auto w-full">
+        {/* Scrollable Chat Area and Anchored Input */}
+        <main className="flex-1 flex flex-col overflow-hidden w-full relative">
           <ChatWindow
             messages={messages}
             onSelectPrompt={handleSendMessage}
@@ -144,11 +151,13 @@ export default function Home() {
           />
 
           {/* Sticky Bottom Input Area */}
-          <div className="p-3 sm:p-5 bg-white border-t border-mono-100">
-            <ChatInput
-              onSendMessage={handleSendMessage}
-              isLoading={isLoading}
-            />
+          <div className="border-t border-mono-200 bg-white/95 backdrop-blur-sm z-10 shrink-0">
+            <div className="max-w-[850px] w-full mx-auto px-4 sm:px-8 py-3.5 sm:py-4">
+              <ChatInput
+                onSendMessage={handleSendMessage}
+                isLoading={isLoading}
+              />
+            </div>
           </div>
         </main>
       </div>
