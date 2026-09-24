@@ -31,7 +31,7 @@ export async function GET() {
   return NextResponse.json({
     status: "unavailable",
     model_ready: false,
-    model_error: "Inference server offline or not configured",
+    model_error: `Backend inference server is offline at '${backendUrl}'. Set MODEL_API_URL in Vercel to your public Python backend URL.`,
     architecture: "Bi-LSTM (Bidirectional Long Short-Term Memory)",
     task: "Multi-class Text Classification",
     num_classes: DEFAULT_CLASSES.length,

@@ -24,8 +24,13 @@ export async function sendMessage(
     let errorDetail = "Something went wrong while processing your message. Please try again.";
     try {
       const errJson = await response.json();
-      if (errJson.detail) errorDetail = errJson.detail;
-      else if (errJson.error) errorDetail = errJson.error;
+      if (errJson.debug?.reason) {
+        errorDetail = errJson.debug.reason;
+      } else if (errJson.detail) {
+        errorDetail = errJson.detail;
+      } else if (errJson.error) {
+        errorDetail = errJson.error;
+      }
     } catch {
       // Keep default error message
     }

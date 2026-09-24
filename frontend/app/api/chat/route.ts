@@ -51,6 +51,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           error: "Something went wrong while processing your message. Please try again.",
+          debug: {
+            target_url: backendUrl,
+            status: 503,
+            reason: `Backend inference server at '${backendUrl}' is offline or unreachable. Configure MODEL_API_URL in Vercel to your public Python backend URL.`,
+          },
         },
         { status: 503 }
       );
