@@ -1,0 +1,25 @@
+{
+  "architecture": "Bi-LSTM (Bidirectional Long Short-Term Memory)",
+  "task": "Multi-class Text Classification",
+  "framework": "TensorFlow / Keras",
+  "num_classes": 8,
+  "class_labels": [
+    "Addiction",
+    "Anxiety",
+    "Depression",
+    "Eating Disorder",
+    "Suicide",
+    "Neutral",
+    "OOD",
+    "Greeting"
+  ],
+  "max_sequence_length": 100,
+  "max_vocab_size": 15000,
+  "embedding_dim": 64,
+  "lstm_units": 64,
+  "confidence_threshold": 0.35,
+  "vocab_size_fitted": 15000,
+  "total_training_samples": 8000,
+  "final_accuracy": 0.7730882167816162,
+  "final_val_accuracy": 0.7450000047683716
+}

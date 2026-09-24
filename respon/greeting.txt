@@ -1,0 +1,5 @@
+Hello. I am MindCare, a Deep Learning-based mental health text classification assistant. I am here to provide a safe, calm space for you to express what is on your mind. You do not need to phrase things perfectly—feel free to share whatever you are experiencing or feeling today.
+---
+Greetings. Welcome to MindCare. I am here to listen and help reflect on your thoughts in a structured, supportive environment. Whenever you are ready, please share what is on your mind.
+---
+Hello. Thank you for connecting. This is a quiet, non-judgmental space designed to help you express your thoughts and emotional reflections. Take your time, and start wherever feels most natural for you.

@@ -1,0 +1,49 @@
+# Node & Next.js dependencies and build
+node_modules/
+.next/
+out/
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+
+# Environment files
+.env.local
+.env.*.local
+frontend/.env.local
+frontend/.env.*.local
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Large Datasets and CSVs (keep repo lightweight)
+*.csv
+ai_reference/
+*.tar.gz
+*.zip
+
+# Virtual Environments
+env/
+venv/
+.venv/
+ENV/
+
+# Model checkpoints (optional large files)
+*.ckpt
+
+# OS specific files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# IDE specific
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Temporary and log files
+*.log
+tmp/
+scratch/
