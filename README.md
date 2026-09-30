@@ -1,3 +1,13 @@
+---
+title: MindCare Backend API
+emoji: 🧠
+colorFrom: gray
+colorTo: black
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # MindCare — Deep Learning Mental Health Chatbot
 
 > A research-grade, modern web-based text classification assistant designed to categorize user reflections and provide safe, controlled, empathetic responses.
