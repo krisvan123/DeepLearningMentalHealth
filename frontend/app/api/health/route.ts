@@ -15,6 +15,9 @@ export async function GET() {
       method: "GET",
       signal: controller.signal,
       cache: "no-store",
+      headers: {
+        "Bypass-Tunnel-Reminder": "true",
+      },
     });
 
     clearTimeout(timeoutId);
